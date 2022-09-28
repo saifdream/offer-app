@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Category</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form">
+        <input type="file" #fileInput style="visibility: hidden; height: 0" name="files[]" (change)="processWebImage($event)" />
+        <div class="category-image-wrapper" (tap)="getCategory()">
+            <div class="category-image-placeholder" *ngIf="!this.form.controls.categoryPic.value">
+                <ion-icon name="camera"></ion-icon>
+                <div>
+                    Choose an image
+                </div>
+            </div>
+            <div class="category-image" [style.backgroundImage]="getCategoryImageStyle()" *ngIf="this.form.controls.categoryPic.value"></div>
+        </div>
+        <br />
+        <ion-list>
+            <ion-item>
+                <ion-label fixed>Name</ion-label>
+                <ion-input type="text" formControlName="name" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Description</ion-label>
+                <ion-input type="text" formControlName="description" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Is Active?</ion-label>
+                <ion-toggle color="primary" formControlName="isActive"></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <button ion-button full round color="primary" (tap)="addCategory()" [disabled]="!isReadyToSave">Upload</button>
+    </form>
+</ion-content>

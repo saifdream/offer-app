@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mercahnt</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form">
+        <input type="file" #fileInput style="visibility: hidden; height: 0" name="files[]" (change)="processWebImage($event)" />
+        <div class="mercahnt-image-wrapper" (tap)="getMercahnt()">
+            <div class="mercahnt-image-placeholder" *ngIf="!this.form.controls.mercahntPic.value">
+                <ion-icon name="camera"></ion-icon>
+                <div>
+                    Choose an image
+                </div>
+            </div>
+            <div class="mercahnt-image" [style.backgroundImage]="getMercahntImageStyle()" *ngIf="this.form.controls.mercahntPic.value"></div>
+        </div>
+        <br />
+        <ion-list>
+            <ion-item>
+                <ion-label>Category</ion-label>
+                <ion-select formControlName="categoryId">
+                  <ion-option *ngFor="let c of categories" [value]="c.id">{{c.name}}</ion-option>
+                </ion-select>
+              </ion-item>
+            <ion-item>
+                <ion-label fixed>Name</ion-label>
+                <ion-input type="text" formControlName="name" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Address</ion-label>
+                <ion-input type="text" formControlName="address" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Contact</ion-label>
+                <ion-input type="tel" formControlName="contact" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Email</ion-label>
+                <ion-input type="email" formControlName="email" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Web</ion-label>
+                <ion-input type="text" formControlName="web" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Latitude</ion-label>
+                <ion-input type="text" formControlName="lat" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Longitude</ion-label>
+                <ion-input type="text" formControlName="lng" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Is Active?</ion-label>
+                <ion-toggle color="primary" formControlName="isActive"></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <button ion-button full round color="primary" (tap)="addMercahnt()" [disabled]="!isReadyToSave">Upload</button>
+    </form>
+</ion-content>

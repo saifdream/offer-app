@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="!isCategoryEmpty">
+    <ion-item-divider color="dark-light">
+      Highlighted
+    </ion-item-divider>
+    <div class="image">
+        <ion-slides loop="true" effect="slider" autoplay="3000">
+          <!-- autoplay="3000" -->
+          <ion-slide *ngFor="let h of highlighted" class="heighlight-container" (click)="goToProductDetails(h)">
+            <img src="{{imgUrl + 'products/' + h.image}}">
+            <div class="centered content">{{h.name}}</div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+  </ion-list>
+  
+  <ion-list *ngIf="!isCategoryEmpty">
+    <ion-item-divider color="dark-light">
+      Category
+    </ion-item-divider>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4 *ngFor="let c of categories" class="container" (click)="goToMerchantList(c)">
+          <img src="{{imgUrl + 'categories/' + c.image}}">
+          <div class="centered content">{{c.name}}</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <ion-card *ngIf="isCategoryEmpty" padding text-center>
+    Category Empty. Please add first.
+  </ion-card>
+
+  <ion-list *ngIf="!isTrendingEmpty">
+      <ion-item-divider color="dark-light">
+        Trending
+      </ion-item-divider>
+      <div class="image">
+          <ion-slides loop="true" effect="slider">
+            <!-- autoplay="3000" -->
+            <ion-slide *ngFor="let t of trending" class="heighlight-container" (click)="goToProductDetails(t)">
+                <img src="{{imgUrl + 'products/' + t.image}}">
+              <div class="centered content">{{t.name}}</div>
+            </ion-slide>
+          </ion-slides>
+        </div>
+    </ion-list>
+</ion-content>

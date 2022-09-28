@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{merchant['name']}}'s Porduct</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-card *ngIf="isEmpty" padding text-center>
+      No Product found.
+    </ion-card>
+    <ion-list [virtualScroll]="products" approxItemHeight="62px">
+      <button ion-item  *virtualItem="let p" (click)="goToProductDetails(p)">
+        <ion-thumbnail item-start>
+          <img src="{{imgUrl + 'products/' + p.image}}">
+        </ion-thumbnail>
+        <h2>{{p.name}}</h2>
+        <p>{{p.description}}</p>
+        <ion-note item-end>BDT. {{p.price}}</ion-note>
+      </button>
+    </ion-list>
+</ion-content>

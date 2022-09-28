@@ -1,0 +1,7 @@
+{
+  "name": "beatnik-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

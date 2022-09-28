@@ -1,0 +1,27 @@
+page-mercahnt {
+    .mercahnt-image-wrapper {
+        text-align: center;
+        //margin: 1px 0;
+        .mercahnt-image {
+            width: 300px;
+            height: 250px;
+            border-radius: 0%;
+            display: inline-block;
+            background-size: 105px 105px;
+            background: no-repeat center;
+        }
+        .mercahnt-image-placeholder {
+            display: inline-block;
+            background-color: #eee;
+            width: 300px;
+            height: 250px;
+            border-radius: 0%;
+            font-size: 12px;
+            ion-icon {
+                font-size: 44px;
+                margin-bottom: -100px;
+                margin-top: 100px;
+            }
+        }
+    }
+}

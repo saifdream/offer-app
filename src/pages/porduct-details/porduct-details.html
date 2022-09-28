@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{product['name']}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card  class="cards-list">
+    <img src="{{imgUrl + 'products/' + product.image}}">
+    <ion-card-content>
+      <ion-card-header> {{product.name}} </ion-card-header>
+      <p ion-item> {{product.description}} </p>
+      <p ion-item> Price: BDT. {{product.price}} </p>
+      <p ion-item> Size: BDT. {{product.size}} </p>
+      <p ion-item> Color: BDT. {{product.color}} </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{category['name']}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngIf="isEmpty" padding text-center>
+    No Merchant in your location.
+  </ion-card>
+  <ion-list [virtualScroll]="merchants" approxItemHeight="62px">
+    <button ion-item  *virtualItem="let m" (click)="goToProductList(m)">
+      <ion-avatar item-start>
+        <img src="{{imgUrl + 'merchants/' + m.logo}}">
+      </ion-avatar>
+      <h2>{{m.name}}</h2>
+      <p>Address: {{m.address}}</p>
+      <p>Distance: {{getDistanceFromLatLonInKm(m.lat, m.lng) | number}} KM</p>
+    </button>
+  </ion-list>
+</ion-content>

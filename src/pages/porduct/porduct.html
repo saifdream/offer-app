@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Porduct</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form">
+        <input type="file" #fileInput style="visibility: hidden; height: 0" name="files[]" (change)="processWebImage($event)" />
+        <div class="product-image-wrapper" (tap)="getProduct()">
+            <div class="product-image-placeholder" *ngIf="!this.form.controls.productPic.value">
+                <ion-icon name="camera"></ion-icon>
+                <div> Choose an image </div>
+            </div>
+            <div class="product-image" [style.backgroundImage]="getProductImageStyle()" *ngIf="this.form.controls.productPic.value"></div>
+        </div>
+        <br />
+        <ion-list>
+            <ion-item>
+                <ion-label>Category</ion-label>
+                <ion-select formControlName="categoryId">
+                  <ion-option (ionSelect)="getMerchant(c.id)" *ngFor="let c of categories" [value]="c.id">{{c.name}}</ion-option>
+                </ion-select>
+              </ion-item>
+            <ion-item>
+                <ion-label>Merchant</ion-label>
+                <ion-select formControlName="merchantId">
+                  <ion-option *ngFor="let m of merchants" [value]="m.id">{{m.name}}</ion-option>
+                </ion-select>
+              </ion-item>
+            <ion-item>
+                <ion-label fixed>Name</ion-label>
+                <ion-input type="text" formControlName="name" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Description</ion-label>
+                <ion-input type="text" formControlName="description" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Price</ion-label>
+                <ion-input type="number" formControlName="price" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Size</ion-label>
+                <ion-select formControlName="size">
+                  <ion-option value="Small">Small</ion-option>
+                  <ion-option value="Medium">Medium</ion-option>
+                  <ion-option value="Large">Large</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Color</ion-label>
+                <ion-select formControlName="color">
+                  <ion-option value="Black">Black</ion-option>
+                  <ion-option value="Blue">Blue</ion-option>
+                  <ion-option value="Green">Green</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Qty.</ion-label>
+                <ion-input type="number" formControlName="qty" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Is Highlighted?</ion-label>
+                <ion-toggle color="primary" formControlName="isHighlighted"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Is Trending?</ion-label>
+                <ion-toggle color="primary" formControlName="isTrending"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Is Active?</ion-label>
+                <ion-toggle color="primary" formControlName="isActive"></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <button ion-button full round color="primary" (tap)="addProduct()" [disabled]="!isReadyToSave">Upload</button>
+    </form>
+</ion-content>
